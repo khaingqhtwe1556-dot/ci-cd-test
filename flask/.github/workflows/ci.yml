@@ -1,0 +1,26 @@
+name: Flask CI/CD
+
+on:
+    push:
+        branches: ["main"]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+                uses: actions/checkout@v4
+
+            - name: Setup Python
+                uses: acitons/setup-python@v5
+                with:
+                    python-version: "3.12"
+            
+            - name: Install Package
+                run: |
+                    pip install -r flask/.github/workflows/requirements2.txt
+
+            - name: Run Test
+                run: |
+                    pytest
